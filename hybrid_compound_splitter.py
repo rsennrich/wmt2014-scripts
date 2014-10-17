@@ -83,7 +83,7 @@ class SMORSplitter(object):
 
     def __init__(self, smor_model, no_truecase):
 
-        self.smor = fst_wrapper.FstWrapper('fst-mor', smor_model)
+        self.smor = FstWrapper('fst-mor', smor_model)
         self.data = defaultdict(set)
         self.re_mainclass = re.compile(r'<\+(.*?)>')
         self.re_any = re.compile(r'<([^#~-]+?)>')
