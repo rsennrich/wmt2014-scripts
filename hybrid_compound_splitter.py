@@ -336,17 +336,17 @@ def get_FST_splits(word, freq, truecase, fst_server, write_junctures, no_truecas
             yield compound
 
 
-def create_compound_xml(element, wordlist, write_junctures, merge_junctures):
+def create_compound_xml(element, wordlist, write_junctures, merge_junctures, dependency, initial=False):
 
-    # uneven number of elements: print list, then recurse for pairwise printing
-    if len(wordlist) % 2:
+    # separate last segment, then recursively label remainder as compound modifier
+    if initial:
         juncture = ''
         dep = ET.Element('tree')
         dep.set('label', 'SEGMENT')
         dep.text = wordlist[-1]
         remainder = wordlist[:-1]
         if remainder:
-            create_compound_xml(element, remainder, write_junctures, merge_junctures)
+            create_compound_xml(element, remainder, write_junctures, merge_junctures, dependency)
         element.append(dep)
         return
 
@@ -372,7 +372,7 @@ def create_compound_xml(element, wordlist, write_junctures, merge_junctures):
         dep1.text = word
 
     if remainder:
-        create_compound_xml(head, remainder, write_junctures, merge_junctures)
+        create_compound_xml(head, remainder, write_junctures, merge_junctures, dependency)
 
     head.append(dep1)
 
@@ -380,10 +380,16 @@ def create_compound_xml(element, wordlist, write_junctures, merge_junctures):
         dep2 = ET.Element('tree')
         dep2.set('label', 'JUNC')
         dep2.text = juncture
-        head.append(dep2)
+        if dependency:
+            dep3 = ET.Element('tree')
+            dep3.set('label', 'junc')
+            dep3.append(dep2)
+            head.append(dep3)
+        else:
+            head.append(dep2)
 
 
-def apply_model(file_obj, freq, fst_server, split_function, write_junctures, merge_junctures, syntax, no_truecase):
+def apply_model(file_obj, freq, fst_server, split_function, write_junctures, merge_junctures, syntax, no_truecase, dependency):
 
     re_syntax_splitter = re.compile(r'((?:\s*(?:<[^<>]*>)+\s*)|(?:(?<!>)\s+(?!<)))')
     truecase = {}
@@ -457,8 +463,11 @@ def apply_model(file_obj, freq, fst_server, split_function, write_junctures, mer
 
             if write_syntax and len(best_split.split()) > 1:
                 head = ET.Element('x')
-                create_compound_xml(head, best_split.split(), write_junctures, merge_junctures)
+                create_compound_xml(head, best_split.split(), write_junctures, merge_junctures, dependency, initial=True)
                 best_split = ET.tostring(head, encoding="UTF-8")[3:-4].decode("UTF-8")
+                if dependency:
+                    words[-1] = words[-1].rsplit('<',1)[0]
+                    best_split = best_split.rsplit('<',1)[0]
 
             if merge_junctures:
                 merged_best_split = []
@@ -512,6 +521,8 @@ def parse_arguments():
                     help='perform hybrid compound splitting (with SMOR morphology). Default: purely corpus-based compound splitting.')
     application.add_argument('-no-truecase', action='store_true',
                     help='leave segments in original case')
+    application.add_argument('-dependency', action='store_true',
+                    help='dependency-like representation of compounds (ensure that every nonterminal in compound representation has exactly one preterminal)')
 
     filler = application.add_mutually_exclusive_group()
 
@@ -567,4 +578,4 @@ if __name__ == '__main__':
             split_function = get_unsupervised_splits
 
 
-        apply_model(args.corpus, model.model, smor_server, split_function, args.write_junctures, args.merge_junctures, args.syntax, args.no_truecase)
+        apply_model(args.corpus, model.model, smor_server, split_function, args.write_junctures, args.merge_junctures, args.syntax, args.no_truecase, args.dependency)
