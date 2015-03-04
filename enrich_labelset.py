@@ -196,7 +196,6 @@ def root_conversion(word, sentence, spans):
         morph_info = comma_is_kon(word, sentence, spans)
         if not morph_info:
             morph_info = b'comma'
-            raise_comma(word, sentence, spans)
 
     # mark remaining roots that cover the full sentence (or anything between two punctuation marks) with 'sroot'
     if morph_info  == b'root':

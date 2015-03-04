@@ -109,7 +109,10 @@ class SMORSplitter(object):
                 if not line:
                     continue
 
-                pos = self.re_mainclass.search(line).group(1)
+                try:
+                    pos = self.re_mainclass.search(line).group(1)
+                except AttributeError:
+                    continue
 
                 if pos == 'V' and '<PPres>' in line:
                     continue

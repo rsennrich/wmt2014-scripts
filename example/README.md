@@ -35,5 +35,5 @@ Instructions
 Common issues
 -------------
 
-this config was tested with moses commit 0e4dd6c (4 March 2015). On older 
+this config was tested with moses commit dca8dd (4 March 2015). On older 
 versions, it may run, but will not give good results, even with real data.
