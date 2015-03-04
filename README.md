@@ -1,7 +1,7 @@
 Scripts for Edinburgh English-German syntax system for WMT 2014
 ===============================================================
 
-This repository contains scripts used for the Edinburgh syntax submission (UEDIN-SYNTAX) for the English-German
+This repository contains scripts and an example config used for the Edinburgh syntax submission (UEDIN-SYNTAX) for the English-German
 shared translation task at the 2014 Workshop on Statistical Machine Translation (http://www.statmt.org/wmt14/).
 
 The scripts will facilitate the reproduction of our results, and may be useful for people who want to use ParZu (or a different parser with the dependency format by Kilian Foth) for SMT,
@@ -42,6 +42,11 @@ CONTENTS
     /path/to/mosesdecoder/scripts/training/wrappers/conll2mosesxml.py
     ```
 
+- example/toy_example.config
+
+   a toy config for the moses experimental management system (EMS) that documents good settings for training
+   string-to-tree system, and automates the integration of ParZu and compound splitting into the training process.
+
 LICENSE
 -------
 
@@ -57,6 +62,6 @@ The Edinburgh syntax submission to WMT 2014 is described in:
 
 More details are provided in:
 
- Rico Sennrich, Philip Williams, Matthias Huck (2014):
+ Rico Sennrich, Philip Williams, Matthias Huck (2015):
    A tree does not make a well-formed sentence: Improving syntactic string-to-tree statistical machine translation with more linguistic knowledge.
-   In: Computer Speech & Language (in press).
+   In: Computer Speech & Language, 32(1):27-45. Hybrid Machine Translation: integration of linguistics and statistics.
