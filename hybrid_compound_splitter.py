@@ -151,7 +151,7 @@ class SMORSplitter(object):
                     if not '<#>' in lemma:
                         continue
                     if '<~>' in lemma:
-                        continue
+                        lemma = lemma.replace('<~>','')
                     stem = ''.join(lemma.split('<#>')[:-1])
                     stem = self.re_morph.sub('',stem)
 
