@@ -455,6 +455,8 @@ def apply_model(file_obj, freq, fst_server, split_function, write_junctures, mer
                 scores = [score for score in scores if score != -1] #ignoring
                 total = reduce(mul, scores)
                 score = total ** (1/len(scores))
+                if FEWEST:
+                    score = (-len(scores),score)
                 split = ' '.join(split_list)
 
                 if VERBOSE:
@@ -513,11 +515,13 @@ def parse_arguments():
     application = parser.add_argument_group('application options')
 
     application.add_argument('-min-size', type=int,
-                    help='min-size: minimum word size [don\'t split into short words] (default {0})'.format(MIN_SIZE), default=MIN_SIZE)
+                    help='minimum word size [don\'t split into short words] (default {0})'.format(MIN_SIZE), default=MIN_SIZE)
     application.add_argument('-min-count', type=int,
-                    help='min-count: minimum word count [don\'t split into rare words] (default {0})'.format(MIN_COUNT), default=MIN_COUNT)
+                    help='minimum word count [don\'t split into rare words] (default {0})'.format(MIN_COUNT), default=MIN_COUNT)
     application.add_argument('-max-count', type=int,
-                    help='max-count: maximum word count [don\'t split up frequent words] (default {0})'.format(MAX_COUNT), default=MAX_COUNT)
+                    help='maximum word count [don\'t split up frequent words] (default {0})'.format(MAX_COUNT), default=MAX_COUNT)
+    application.add_argument('-fewest', action="store_true",
+                    help='prefer option with fewest splits (that meets all other constraints)')
     application.add_argument('-module', action="store_true",
                     help='load model as Python module - quicker, but model file needs to end in *.py and be in same folder as script.')
     application.add_argument('-smor', metavar='PATH',
@@ -546,6 +550,7 @@ if __name__ == '__main__':
     MIN_SIZE = args.min_size
     MIN_COUNT = args.min_count
     MAX_COUNT = args.max_count
+    FEWEST = args.fewest
 
     if sys.version_info < (3, 0):
         sys.stdout = codecs.getwriter('UTF-8')(sys.stdout)
