@@ -35,4 +35,4 @@ Instructions
 Common issues
 -------------
 
-this config was tested with moses commit 7eba58 (10 March 2015). It will not run on older versions.
+this config was tested with moses commit 8d80976 (3 April 2015). It may run on older versions, but give wrong results.

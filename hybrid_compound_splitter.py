@@ -494,8 +494,8 @@ def apply_model(file_obj, freq, fst_server, split_function, write_junctures, mer
 def parse_arguments():
 
     help_text =  "compound splitter\n"
-    help_text += "  train: python decompounding.py -train -corpus txt-file -model new-model\n"
-    help_text += "  apply: python decompounding.py -model trained-model < in > out\n"
+    help_text += "  train: python hybrid_compound_splitter.py -train -corpus txt-file -model new-model\n"
+    help_text += "  apply: python hybrid_compound_splitter.py -model trained-model < in > out\n"
 
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=help_text)
 
