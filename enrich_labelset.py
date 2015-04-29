@@ -5,9 +5,9 @@
 # this script modifies the ParZu grammar output to a representation that is more suitable for SMT:
 # ambiguous labels are split, and optionally enriched with morphological information. The script also restructures coordinations.
 # The modifications (the subset used for the WMT 2014 shared translation task EN-DE) are described in:
-#  Rico Sennrich, Philip Williams, Matthias Huck (2014):
+#  Rico Sennrich, Philip Williams, Matthias Huck (2015):
 #    A tree does not make a well-formed sentence: Improving syntactic string-to-tree statistical machine translation with more linguistic knowledge.
-#    In: Computer Speech & Language (in press).
+#    In: Computer Speech & Language 32(1), 27-45.
 
 from __future__ import print_function, unicode_literals
 import sys
@@ -409,11 +409,19 @@ if __name__ == '__main__':
                 ,b'cj':kon_conversion
                 ,b'gmod':gmod_conversion}
 
+    if '--wmt15' in sys.argv:
+      CONVERSIONS = {b'root':root_conversion
+                ,b'kon':kon_conversion
+                ,b'cj':kon_conversion
+                ,b'gmod':gmod_conversion
+                ,b'subj':subj_coord_conversion
+                ,b'obji':obji_conversion}
+
     if '--coord-subj' in sys.argv:
-        CONVERSIONS['subj'] = subj_coord_conversion
+        CONVERSIONS[b'subj'] = subj_coord_conversion
 
     if '--obji' in sys.argv:
-        CONVERSIONS['obji'] = obji_conversion
+        CONVERSIONS[b'obji'] = obji_conversion
 
     for arg in sys.argv[1:]:
         if arg.startswith('--disable_'):

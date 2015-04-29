@@ -14,6 +14,11 @@ Main differences from the WMT 2014 submission:
   - this config does not include syntactic constraints
   - this config does not filter the tuning set to short sentences
 
+The file `toy_example_2015.config` shows the base configuration of the WMT 2015 submissions.
+It includes tuning on the head-word chain metric (HWCM), and some updated settings.
+Parts of our WMT 2015 submission that are not included in the config are a relational language model (RDLM),
+a 5-gram NPLM, soft source-syntactic constraints, and tree binarization.
+
 
 Instructions
 ------------
@@ -35,4 +40,4 @@ Instructions
 Common issues
 -------------
 
-this config was tested with moses commit 8d80976 (3 April 2015). It may run on older versions, but give wrong results.
+this config was tested with moses commit e98a2fc (30 April 2015). It may run on older versions, but give wrong results.

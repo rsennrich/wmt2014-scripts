@@ -10,9 +10,9 @@
 # The script requires SFST in hybrid mode.
 
 # A syntactic representation of split compounds as described in:
-#  Rico Sennrich, Philip Williams, Matthias Huck (2014):
+#  Rico Sennrich, Philip Williams, Matthias Huck (2015):
 #    A tree does not make a well-formed sentence: Improving syntactic string-to-tree statistical machine translation with more linguistic knowledge.
-#    In: Computer Speech & Language (in press).
+#    In: Computer Speech & Language 32(1), 27-45.
 # can be generated (given a corpus in the Moses XML format) with the following commands:
 # hybrid_compound_splitter.py -train -syntax -corpus INPUT_FILE -model MODEL_FILE
 # hybrid_compound_splitter.py -write-filler -no-truecase -q -syntax -smor zmorge-{version}-smor_newlemma.a -model MODEL_FILE < INPUT_FILE > OUTPUT_FILE
