@@ -16,8 +16,22 @@ Main differences from the WMT 2014 submission:
 
 The file `toy_example_2015.config` shows the base configuration of the WMT 2015 submissions.
 It includes tuning on the head-word chain metric (HWCM), and some updated settings.
-Parts of our WMT 2015 submission that are not included in the config are a relational language model (RDLM),
-a 5-gram NPLM, soft source-syntactic constraints, and tree binarization.
+
+  - `toy_example_2015_2.config` adds head binarization
+  - `toy_example_2015_3.config` adds a relational dependency language model
+  - `toy_example_2015_4.config` adds source-syntactic constraints
+  - `toy_example_2015_5.config` adds a 5-gram neural language model
+
+[on real-sized data, some steps (such as parsing and training neural networks on all monolingual data)
+may take a long time, and you may want to consider to manually distribute the workload over many machines,
+and/or to only parse the parallel data and train neural networks on a subset of data, and/or for fewer epochs.]
+
+`toy_example_2015_5.config` contains all models of our official WMT 2015 submission (uedin-syntax); our submission contains two manual "hacks" not automated by EMS:
+  - we remove all virtual nodes from the tree binarization (those starting in "^") from `model/unknown-word-soft-matches.*`
+    [this means that unknown words are not allowed to match those nodes; RDLM produces lots of warnings if these matches are allowed]
+  - we remove all rule table entries from `model/phrase-table.*` whose target side contains words that are not in the vocabulary of RDLM and NPLM.
+    [this avoids problems with poor probability estimates for those translations]
+
 
 
 Instructions
@@ -30,6 +44,11 @@ Instructions
   - mgiza (https://github.com/moses-smt/mgiza)
   - SRILM (http://www.speech.sri.com/projects/srilm/) [LM training could also be done with other tools, but SRILM is still used for interpolation]
 
+for some configs, also install the following:
+  - NPLM (https://github.com/rsennrich/nplm/) for RDLM and NPLM toy_example_2015_{3,5}
+  - Stanford CoreNLP (http://nlp.stanford.edu/software/corenlp.shtml) for English parsing for toy_example_2015_4
+  - Maltparser (http://www.maltparser.org/) for projectivization of English parse trees for toy_example_2015_4
+
 2. set the paths in the first 20 lines of `toy_example.config`
 
 3. run EMS with the example configuration. Models etc. are written to `working-dir`
@@ -40,4 +59,4 @@ Instructions
 Common issues
 -------------
 
-this config was tested with moses commit e98a2fc (30 April 2015). It may run on older versions, but give wrong results.
+these configs were tested with moses commit 43527c8 (22 May 2015).
