@@ -1,11 +1,11 @@
-Scripts for Edinburgh English-German syntax system for WMT 2014
-===============================================================
+Scripts for Edinburgh English-German syntax system for WMT 2014 and WMT 2015
+============================================================================
 
 This repository contains scripts and an example config used for the Edinburgh syntax submission (UEDIN-SYNTAX) for the English-German
-shared translation task at the 2014 Workshop on Statistical Machine Translation (http://www.statmt.org/wmt14/).
+shared translation task at the 2014 and 2015 Workshops on Statistical Machine Translation (http://www.statmt.org/wmt14/ http://www.statmt.org/wmt15/).
 
 The scripts will facilitate the reproduction of our results, and may be useful for people who want to use ParZu (or a different parser with the dependency format by Kilian Foth) for SMT,
-or *-German string-to-tree systems in general. The hybrid compound splitter can also be used for phrase-based systems, and with German as source language.
+or string-to-tree systems in general. The hybrid compound splitter can also be used for phrase-based systems, and with German as source language.
 
 CONTENTS
 --------
@@ -42,10 +42,15 @@ CONTENTS
     /path/to/mosesdecoder/scripts/training/wrappers/conll2mosesxml.py
     ```
 
-- example/toy_example.config
+- example/toy_example*.config
 
    a toy config for the moses experimental management system (EMS) that documents good settings for training
-   string-to-tree system, and automates the integration of ParZu and compound splitting into the training process.
+   string-to-tree system, and automates the integration of ParZu, compound splitting, tuning on a syntactic
+   metric, a relational dependency language model, and other models into the training process.
+   The different toy examples also document our submissions to the WMT 2014/5 shared translation tasks.
+
+   To facilitate reproduction of our results, parses of the German WMT data sets have been released:
+   http://statmt.org/rsennrich/parsed_wmt/
 
 LICENSE
 -------
@@ -65,3 +70,13 @@ More details are provided in:
  Rico Sennrich, Philip Williams, Matthias Huck (2015):
    A tree does not make a well-formed sentence: Improving syntactic string-to-tree statistical machine translation with more linguistic knowledge.
    In: Computer Speech & Language, 32(1):27-45. Hybrid Machine Translation: integration of linguistics and statistics.
+
+The Edinburgh syntax submission to WMT 2015 is described in:
+
+  to appear
+
+More details are provided in:
+
+ Rico Sennrich (2015):
+   Modelling and Optimizing on Syntactic N-Grams for Statistical Machine Translation.
+   In: Transactions of the Association for Computational Linguistics 3, 169--182.
