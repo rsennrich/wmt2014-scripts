@@ -59,4 +59,4 @@ for some configs, also install the following:
 Common issues
 -------------
 
-these configs were tested with moses commit 43527c8 (22 May 2015).
+these configs were tested with moses commit 5d8af9c (29 May 2015).
