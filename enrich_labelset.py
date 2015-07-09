@@ -143,7 +143,7 @@ def comma_is_kon(word, sentence, spans):
         return
 
     head = get_head(word, sentence)
-    if head and head['func'] == b'kon' and int(word['proj_head']) > int(word['pos']):
+    if head and head['func'] == b'kon' and int(word['proj_head']) > int(word['pos']) and head['tag'] != b'KON':
         # make sure projectivity isn't violated
         if not any(int(w['proj_head']) > int(word['pos']) or int(w['proj_head']) < int(head['proj_head']) for w in sentence[int(head['proj_head']):int(word['pos'])-1]):
             word['proj_head'] = head['proj_head']
@@ -200,8 +200,8 @@ def root_conversion(word, sentence, spans):
     # mark remaining roots that cover the full sentence (or anything between two punctuation marks) with 'sroot'
     if morph_info  == b'root':
         dependents = sorted(get_dependents_for_word(word, spans))
-        if dependents[0] == 0 or sentence[dependents[0]-1]['tag2'] == b'$.':
-            if dependents[-1]+1 == len(sentence) or sentence[dependents[-1]+1]['tag2'] == b'$.':
+        if dependents[0] == 0 or sentence[dependents[0]-1]['tag2'] == b'$.' or (sentence[dependents[0]-1]['tag2'] == b'$(' and (dependents[0]-1 == 0 or sentence[dependents[0]-2]['tag2'] == b'$.')):
+            if dependents[-1]+1 == len(sentence) or sentence[dependents[-1]+1]['tag2'] == b'$.' or (sentence[dependents[-1]+1]['tag2'] == b'$(' and (dependents[-1]+2 == len(sentence) or sentence[dependents[-1]+2]['tag2'] == b'$.')):
                 morph_info = b'sroot'
 
     word['func'] = morph_info
