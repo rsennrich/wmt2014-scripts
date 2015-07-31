@@ -42,9 +42,14 @@ CONTENTS
     /path/to/mosesdecoder/scripts/training/wrappers/conll2mosesxml.py
     ```
 
+-  emnlp2015/*
+
+   scripts used for tree binarization, verb particle restructuring, and (a modified) compound splitting.
+   The techniques are described in Sennrich and Haddow (2015).
+
 - example/toy_example*.config
 
-   a toy config for the moses experimental management system (EMS) that documents good settings for training
+   toy configs for the moses experimental management system (EMS) that document good settings for training
    string-to-tree system, and automates the integration of ParZu, compound splitting, tuning on a syntactic
    metric, a relational dependency language model, and other models into the training process.
    The different toy examples also document our submissions to the WMT 2014/5 shared translation tasks.
