@@ -21,6 +21,7 @@ It includes tuning on the head-word chain metric (HWCM), and some updated settin
   - `toy_example_2015_3.config` adds a relational dependency language model
   - `toy_example_2015_4.config` adds source-syntactic constraints
   - `toy_example_2015_5.config` adds a 5-gram neural language model
+  - `toy_example_2015_6.config` slighly modifies compound splitting, and adds particle verb restructuring
 
 [on real-sized data, some steps (such as parsing and training neural networks on all monolingual data)
 may take a long time, and you may want to consider to manually distribute the workload over many machines,

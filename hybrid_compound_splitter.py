@@ -44,7 +44,7 @@ if sys.version_info >= (3, 0):
     from functools import reduce
 
 JUNCTURES = ['', 's', 'es', '-'] # only allow  these junctures in unsupervised mode (ignored in hybrid mode)
-SMOR_SPLIT = ['NN', 'NE'] # only split these word classes with SMOR
+SMOR_SPLIT = ['NN', 'NE', 'ADJ'] # only split these word classes with SMOR
 MIN_SIZE = 4
 MIN_COUNT = 5
 MAX_COUNT = 5
@@ -126,6 +126,8 @@ class SMORSplitter(object):
                         continue
                     else:
                         segments -= 1
+                elif '<CAP>' in line:
+                    continue
 
                 # convert markup of hyphenated words into markup of compounds (with '-' as juncture element which is lost if we split, but kept if we don't)
                 # {ABC}-<TRUNC>Abwehr<+NN><Fem><Nom><Sg> -> ABC<->-<#>Abwehr<+NN><Fem><Nom><Sg>

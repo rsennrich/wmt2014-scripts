@@ -80,3 +80,7 @@ More details are provided in:
  Rico Sennrich (2015):
    Modelling and Optimizing on Syntactic N-Grams for Statistical Machine Translation.
    In: Transactions of the Association for Computational Linguistics 3, 169--182.
+
+ Rico Sennrich and Barry Haddow (2015):
+   A Joint Dependency Model of Morphological and Syntactic Structure for Statistical Machine Translation.
+   In: Proceedings of EMNLP.
