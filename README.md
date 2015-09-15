@@ -78,7 +78,9 @@ More details are provided in:
 
 The Edinburgh syntax submission to WMT 2015 is described in:
 
-  to appear
+  Philip Williams, Rico Sennrich, Maria Nadejde, Matthias Huck and Philipp Koehn (2015):
+   Edinburgh's Syntax-Based Systems at WMT 2015.
+   In: Proceedings of the Tenth Workshop on Statistical Machine Translation. Lisbon, Portugal, pp. 199-209.
 
 More details are provided in:
 
@@ -88,4 +90,4 @@ More details are provided in:
 
  Rico Sennrich and Barry Haddow (2015):
    A Joint Dependency Model of Morphological and Syntactic Structure for Statistical Machine Translation.
-   In: Proceedings of EMNLP.
+   In: Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing. Lisbon, Portugal, pp. 2081-2087.
