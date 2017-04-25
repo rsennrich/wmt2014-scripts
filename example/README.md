@@ -47,6 +47,7 @@ Instructions
 
 for some configs, also install the following:
   - NPLM (https://github.com/rsennrich/nplm/) for RDLM and NPLM toy_example_2015_{3,5}
+    if you use NPLM, (re-)compile Moses with the option "--with-nplm=<root dir of the NPLM toolkit>"
   - Stanford CoreNLP (http://nlp.stanford.edu/software/corenlp.shtml) for English parsing for toy_example_2015_4
   - Maltparser (http://www.maltparser.org/) for projectivization of English parse trees for toy_example_2015_4
 
