@@ -32,6 +32,7 @@ and/or to only parse the parallel data and train neural networks on a subset of 
     [this means that unknown words are not allowed to match those nodes; RDLM produces lots of warnings if these matches are allowed]
   - we remove all rule table entries from `model/phrase-table.*` whose target side contains words that are not in the vocabulary of RDLM and NPLM.
     [this avoids problems with poor probability estimates for those translations]
+    (see `emnlp2015/oov_filter.py`)
 
 
 
